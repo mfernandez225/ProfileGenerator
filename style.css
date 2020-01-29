@@ -1,0 +1,15 @@
+.container {
+  font-family: 'Roboto',
+    sans-serif;
+}
+
+#profileName {
+  font-weight: bolder;
+  font-size: 40px;
+}
+
+#profilePicture {
+  background-color: white;
+  border-bottom: 10px solid black;
+  margin-bottom: 50px;
+}
