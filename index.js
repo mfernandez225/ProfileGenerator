@@ -7,8 +7,7 @@ const pdf = require("html-pdf");
 const writeFileAsync = util.promisify(fs.writeFile);
 
 function promptUser() {
-  return inquirer.prompt([
-    {
+  return inquirer.prompt([{
       type: "input",
       name: "color",
       message: "What is your favorite color?"
@@ -52,36 +51,30 @@ function createHTML({
       <div class="col">
         <ul class="">
           <li id="github" class="list-group-item">
-            GitHub Username: ${github}
+            GitHub Username: <a href="https://github.com/${github}">${github}</a>
           </li>
-          <li id="location" class="list-group-item">City: ${location}
-          </li>
-          </li>
-          <li id="repos" class="list-group-item">Public Repositories: ${public_repos}
+          <li id="location" class="list-group-item">
+            Location: <a href="https://www.google.com/maps/place/${location}">${location}</a>
           </li>
           </li>
-          <li id="Followers" class="list-group-item">Followers: ${following}
+          <li id="repos" class="list-group-item">
+            Public Repositories: ${public_repos}
           </li>
+          </li>
+          <li id="Followers" class="list-group-item">
+            Followers: ${following}
+          </li>
+          <li id="blog" class="list-group-item">
+            Blog: <a href="https://www.engadget.com/">Engadget</a>
         </ul>
       </div>
     </div>
   </div>
 </body>
-</html>
-
-`;
+</html>`;
 }
 
-promptUser().then(function(answers) {
-  // What I need from Github
-  // Profile Image
-  // Username
-  // Links to location, github profile, blog
-  // Display user bio
-  // Number of public repos
-  // Number of Followers
-  // Github Stars
-  // Number of user following
+promptUser().then(function (answers) {
   axios
     .get(`https://api.github.com/users/${answers.github}`)
     .then(
@@ -110,7 +103,7 @@ promptUser().then(function(answers) {
           .create(html, {
             format: "Letter"
           })
-          .toFile("./profile.pdf", function(err, res) {
+          .toFile("./profile.pdf", function (err, res) {
             if (err) return console.log(err);
             console.log(res);
           });
